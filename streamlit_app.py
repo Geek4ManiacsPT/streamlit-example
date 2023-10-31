@@ -1,38 +1,57 @@
-from collections import namedtuple
-import altair as alt
-import math
-import pandas as pd
 import streamlit as st
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import plotly.express as px
+import pydeck as pdk
 
-"""
-# Welcome to Streamlit!
+# Function to load data (you might need to adjust the path)
+def load_data():
+    data = pd.read_excel('campanha_marketing_superfruits_Limpa.xlsx')
+    # Add any data preprocessing here
+    return data
 
-Edit `/streamlit_app.py` to customize this app to your heart's desire :heart:
+# Load the data
+data = load_data()
 
-If you have any questions, checkout our [documentation](https://docs.streamlit.io) and [community
-forums](https://discuss.streamlit.io).
+# Setting up the layout
+st.title("Marketing Campaign Analysis Dashboard")
 
-In the meantime, below is an example of what you can do with just a few lines of code:
-"""
+# Top Line Visuals
+st.header("Top Line Visuals")
 
 
-with st.echo(code_location='below'):
-    total_points = st.slider("Number of points in spiral", 1, 5000, 2000)
-    num_turns = st.slider("Number of turns in spiral", 1, 100, 9)
 
-    Point = namedtuple('Point', 'x y')
-    data = []
+# Bar Chart for Age Group
+st.subheader("Visitor Distribution by Age Group")
+age_group_data = data['age'].value_counts()
+fig_age = px.bar(age_group_data, x=age_group_data.index, y=age_group_data.values, labels={'x':'Age Group', 'y':'Number of Visitors'})
+st.plotly_chart(fig_age)
 
-    points_per_turn = total_points / num_turns
+# Line Chart for Interactions Over Time
+st.subheader("Interactions Over Time")
+# You might need to preprocess the data to get the desired format
+# interaction_time_data = ...
+# fig_interaction_time = ...
+# st.plotly_chart(fig_interaction_time)
 
-    for curr_point_num in range(total_points):
-        curr_turn, i = divmod(curr_point_num, points_per_turn)
-        angle = (curr_turn + 1) * 2 * math.pi * i / points_per_turn
-        radius = curr_point_num / total_points
-        x = radius * math.cos(angle)
-        y = radius * math.sin(angle)
-        data.append(Point(x, y))
+# Bottom Line Visuals
+st.header("Bottom Line Visuals")
 
-    st.altair_chart(alt.Chart(pd.DataFrame(data), height=500, width=500)
-        .mark_circle(color='#0068c9', opacity=0.5)
-        .encode(x='x:Q', y='y:Q'))
+# Pie Chart for Source Channels
+st.subheader("Visitor Sources")
+source_data = data['source_channel'].value_counts()
+fig_source = px.pie(source_data, values=source_data.values, names=source_data.index)
+st.plotly_chart(fig_source)
+
+# Interactive Table
+st.subheader("Detailed Data")
+st.dataframe(data)  # You can add more interactivity using st.table or st.write
+
+# Bar Chart for Operating Systems
+st.subheader("Operating System Usage Among Visitors")
+os_data = data['operating_system'].value_counts()
+fig_os = px.bar(os_data, x=os_data.index, y=os_data.values, labels={'x':'Operating System', 'y':'Number of Visitors'})
+st.plotly_chart(fig_os)
+
+
