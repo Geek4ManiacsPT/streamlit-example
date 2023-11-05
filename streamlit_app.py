@@ -22,7 +22,7 @@ st.text("Por Martha Dominguez de Gouveia")
 # Columnas para las visualizaciones
 col1, col2, col3 = st.columns(3)
 col4, col5, col6 = st.columns(3)
-st.title('Responder à pergunta-chave de marketing: No próximo mês o orçamento é aumentado para 1200€, e o Marketing vai duplicar para 400€ o que vai gastar num canal. Qual é que deve ser escolhido? Devemos focar o nosso marketing no Instagram ou no TikTok na próxima campanha? ')
+st.subheader('Responder à pergunta-chave de marketing: No próximo mês o orçamento é aumentado para 1200€, e o Marketing vai duplicar para 400€ o que vai gastar num canal. Qual é que deve ser escolhido? Devemos focar o nosso marketing no Instagram ou no TikTok na próxima campanha? ')
 
 st.markdown("""
     <style>
@@ -74,7 +74,7 @@ def plot_age_range_distribution(df):
 
 with col1:
     st.header("Conseguimos atingir os clientes ideais?")
-    st.text('O público-alvo principal são indivíduos de 18 a 30 anos. O gráfico "Idade do Cliente" indica que a maioria das visitas ocorre exatamente nessa faixa etária, seguido pelo grupo de 31 a 34 anos. Isso mostra uma correspondência efetiva entre o público-alvo e os usuários que estão interagindo com o serviço.')
+    st.subheader('O público-alvo principal são indivíduos de 18 a 30 anos. O gráfico "Idade do Cliente" indica que a maioria das visitas ocorre exatamente nessa faixa etária, seguido pelo grupo de 31 a 34 anos. Isso mostra uma correspondência efetiva entre o público-alvo e os usuários que estão interagindo com o serviço.')
     st.pyplot(plot_age_range_distribution(df))
 
 def plot_channel_efficiency(df):
@@ -107,7 +107,7 @@ def plot_device_distribution_pie(df):
 
 with col2:
     st.header("Os nossos anúncios devem ser dirigidos a um ecrã de telefone ou de computador?")
-    st.text('O gráfico "Dispositivos do Cliente" mostra uma clara preferência por dispositivos móveis em relação a desktops.')
+    st.subheader('O gráfico "Dispositivos do Cliente" mostra uma clara preferência por dispositivos móveis em relação a desktops.')
     st.pyplot(plot_device_distribution_pie(df))
 
 
@@ -131,7 +131,7 @@ def plot_performance_by_channel(df, selected_element):
 
 with col3:
     st.header("Todos os canais estão a ter sucesso?")
-    st.text('Considerando que o público-alvo é mais jovem e provavelmente mais engajado em plataformas sociais como TikTok, Facebook e Instagram, esses canais podem estar apresentando um melhor desempenho. LinkedIn e Twitter podem não ser tão eficazes para o público mais jovem, que procura conteúdo de entretenimento e socialização.')
+    st.subheader('Considerando que o público-alvo é mais jovem e provavelmente mais engajado em plataformas sociais como TikTok, Facebook e Instagram, esses canais podem estar apresentando um melhor desempenho. LinkedIn e Twitter podem não ser tão eficazes para o público mais jovem, que procura conteúdo de entretenimento e socialização.')
     
     
     interaction_types = ['comment', 'like', 'buy', 'share', 'follow']
@@ -160,7 +160,7 @@ def plot_likes_by_hour(df):
 
 with col4:
     st.header("A que horas do dia é que recebemos mais likes?")
-    st.text('As horas com o maior número de "likes" são às 12h e às 22h, com 11 "likes" cada. Isso confirma o que foi visto no gráfico, onde essas duas barras são as mais altas.')
+    st.subheader('As horas com o maior número de "likes" são às 12h e às 22h, com 11 "likes" cada. Isso confirma o que foi visto no gráfico, onde essas duas barras são as mais altas.')
     st.pyplot(plot_likes_by_hour(df))
 
 def plot_purchases_by_hour(df):
@@ -180,7 +180,7 @@ def plot_purchases_by_hour(df):
 
 with col5:
     st.header("A que horas do dia obtemos mais compras?")
-    st.text('A análise indica que as horas do dia com o maior número de compras são às 11h e às 12h, ambas com 8 compras. Isso sugere que há um pico de atividade de compra no final da manhã.')
+    st.subheader('A análise indica que as horas do dia com o maior número de compras são às 11h e às 12h, ambas com 8 compras. Isso sugere que há um pico de atividade de compra no final da manhã.')
     st.pyplot(plot_purchases_by_hour(df)) 
 
 def plot_top_likes_days(df):
@@ -204,7 +204,7 @@ def plot_top_likes_days(df):
 
 with col6:
     st.header("Quando é que a campanha que teve melhor desempenho?")
-    st.text('Com base no gráfico de barras, podemos ver que a campanha teve o melhor desempenho no dia 12 de maio de 2022, onde houve o maior número de cliques.')
+    st.subheader('Com base no gráfico de barras, podemos ver que a campanha teve o melhor desempenho no dia 12 de maio de 2022, onde houve o maior número de cliques.')
     st.pyplot(plot_top_likes_days(df))
 
 
@@ -258,3 +258,5 @@ def plot_cost_per_click(cost_per_click_df):
 with col8:  
     st.header("Custo por clique por canal de origem")
     st.pyplot(plot_cost_per_click(cost_per_click_df))
+
+
