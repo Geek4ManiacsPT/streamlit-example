@@ -194,7 +194,7 @@ def plot_top_likes_days(df):
     
     fig, ax = plt.subplots(figsize=(12, 6))
     ax.bar(likes_by_date_sorted.head(15)['date'].dt.strftime('%Y-%m-%d'), likes_by_date_sorted.head(15)['count'])
-    ax.set_title('Dias com mais interesse na campanha.)
+    ax.set_title('Dias com mais interesse na campanha.')
     ax.set_xlabel('Data')
     ax.set_ylabel('Número de cliques')
     ax.set_xticklabels(likes_by_date_sorted.head(15)['date'].dt.strftime('%Y-%m-%d'), rotation=90)
