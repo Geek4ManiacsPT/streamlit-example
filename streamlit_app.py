@@ -1,57 +1,63 @@
 import streamlit as st
 import pandas as pd
-import matplotlib as plt
+import matplotlib.pyplot as plt
 import seaborn as sns
-import plotly.express as px
-import pydeck as pdk
-
-# Function to load data (you might need to adjust the path)
-def load_data():
-    data = pd.read_excel('campanha_marketing_superfruits_Limpa.xlsx')
-    # Add any data preprocessing here
-    return data
-
-# Load the data
-data = load_data()
-
-# Setting up the layout
-st.title("Marketing Campaign Analysis Dashboard")
-
-# Top Line Visuals
-st.header("Top Line Visuals")
 
 
+sns.set_theme(style="whitegrid")
 
-# Bar Chart for Age Group
-st.subheader("Visitor Distribution by Age Group")
-age_group_data = data['age'].value_counts()
-fig_age = px.bar(age_group_data, x=age_group_data.index, y=age_group_data.values, labels={'x':'Age Group', 'y':'Number of Visitors'})
-st.plotly_chart(fig_age)
+# Cargar los datos
+df = pd.read_csv('final_df.csv')
 
-# Line Chart for Interactions Over Time
-st.subheader("Interactions Over Time")
-# You might need to preprocess the data to get the desired format
-# interaction_time_data = ...
-# fig_interaction_time = ...
-# st.plotly_chart(fig_interaction_time)
+# Función para crear una visualización de dispositivos
+def plot_device_distribution(df):
+    plt.figure(figsize=(10, 6))
+    device_count = df['device'].value_counts()
+    sns.barplot(x=device_count.index, y=device_count.values, palette='viridis')
+    plt.title('Distribución de Dispositivos Utilizados')
+    plt.xlabel('Dispositivo')
+    plt.ylabel('Número de Eventos')
+    plt.xticks(rotation=45)
+    return plt
 
-# Bottom Line Visuals
-st.header("Bottom Line Visuals")
+# Función para crear una visualización de canales de origen
+def plot_channel_efficiency(df):
+    plt.figure(figsize=(14, 7))
+    channel_count = df['source_channel'].value_counts()
+    sns.barplot(x=channel_count.index, y=channel_count.values, palette='coolwarm')
+    plt.title('Eficacia de los Canales de Origen')
+    plt.xlabel('Canal de Origen')
+    plt.ylabel('Número de Eventos')
+    plt.xticks(rotation=45)
+    return plt
 
-# Pie Chart for Source Channels
-st.subheader("Visitor Sources")
-source_data = data['source_channel'].value_counts()
-fig_source = px.pie(source_data, values=source_data.values, names=source_data.index)
-st.plotly_chart(fig_source)
+# Configuración del layout del dashboard
+st.set_page_config(layout="wide")
 
-# Interactive Table
-st.subheader("Detailed Data")
-st.dataframe(data)  # You can add more interactivity using st.table or st.write
+# Título del Dashboard
+st.title('Dashboard de Análisis de Marketing')
 
-# Bar Chart for Operating Systems
-st.subheader("Operating System Usage Among Visitors")
-os_data = data['operating_system'].value_counts()
-fig_os = px.bar(os_data, x=os_data.index, y=os_data.values, labels={'x':'Operating System', 'y':'Number of Visitors'})
-st.plotly_chart(fig_os)
+# Columnas para las visualizaciones
+col1, col2 = st.columns(2)
+
+# Visualización en la primera columna
+with col1:
+    st.header("Distribución de Dispositivos")
+    st.pyplot(plot_device_distribution(df))
+
+# Visualización en la segunda columna
+with col2:
+    st.header("Eficacia de los Canales")
+    st.pyplot(plot_channel_efficiency(df))
+
+def plot_channel_efficiency(df):
+    plt.figure(figsize=(14, 7))
+    channel_count = df['source_channel'].value_counts().sort_values(ascending=False)
+    sns.barplot(x=channel_count.index, y=channel_count.values, palette='coolwarm')
+    plt.title('Eficacia de los Canales de Origen')
+    plt.xlabel('Canal de Origen')
+    plt.ylabel('Número de Eventos')
+    plt.xticks(rotation=45)
+    return plt
 
 
